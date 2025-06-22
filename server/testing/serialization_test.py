@@ -1,6 +1,6 @@
 from app import app
 from models import *
-
+from schemas import CustomerSchema, ItemSchema, ReviewSchema  
 
 def test_customer_is_serializable(test_client):
     '''customer is serializable'''
@@ -15,8 +15,7 @@ def test_customer_is_serializable(test_client):
     assert customer_dict['id']
     assert customer_dict['name'] == 'Phil'
     assert customer_dict['reviews']
-    assert 'customer' not in customer_dict['reviews']
-
+    assert 'customer' not in customer_dict['reviews']  
 def test_item_is_serializable(test_client):
     '''item is serializable'''
     i = Item(name='Insulated Mug', price=9.99)
@@ -31,7 +30,7 @@ def test_item_is_serializable(test_client):
     assert item_dict['name'] == 'Insulated Mug'
     assert item_dict['price'] == 9.99
     assert item_dict['reviews']
-    assert 'item' not in item_dict['reviews']
+    assert 'item' not in item_dict['reviews']  # Check nested exclusion
 
 def test_review_is_serializable(test_client):
     '''review is serializable'''
@@ -49,5 +48,5 @@ def test_review_is_serializable(test_client):
     assert review_dict['customer']
     assert review_dict['item']
     assert review_dict['comment'] == 'great!'
-    assert 'reviews' not in review_dict['customer']
-    assert 'reviews' not in review_dict['item']
+    assert 'reviews' not in review_dict['customer']  # Check nested exclusion
+    assert 'reviews' not in review_dict['item']      # Check nested exclusion
