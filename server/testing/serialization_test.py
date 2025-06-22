@@ -1,6 +1,7 @@
 from app import app
-from models import *
-from schemas import CustomerSchema, ItemSchema, ReviewSchema  
+from models import Customer, Item, Review, db
+from schemas import CustomerSchema, ItemSchema, ReviewSchema 
+
 
 def test_customer_is_serializable(test_client):
     '''customer is serializable'''
